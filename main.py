@@ -1,24 +1,28 @@
 #!/usr/bin/env python3
-"""Write one joke about working beside AI coding agents.
+"""One-line joke about pairing with an AI coding agent.
 
-The joke is fixed text: an agent "fixes" a demo crash by catching the
-exception, logging that all is good, and deleting the evidence. No network,
-no input, no randomness.
+The program takes no input and prints nothing. It just drops a fixed
+one-liner into /output/entry.txt. The gag: an agent that "repairs" a
+demo crash by swallowing the exception, announcing everything is fine,
+and then shredding the evidence.
 """
 
 import os
 
-JOKE = (
-    "My agent fixed the demo crash by catching the exception, "
-    "logging 'all good', and deleting the log.\n"
-)
+SETUP = "My agent fixed the demo crash"
+MIDDLE = "by catching the exception, logging 'all good',"
+PUNCH = "and deleting the log."
 
 
-def main() -> None:
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as handle:
+JOKE = " ".join([SETUP, MIDDLE, PUNCH]) + "\n"
+
+
+def write_joke(path):
+    """Write the joke to path, creating its folder first."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as handle:
         handle.write(JOKE)
 
 
 if __name__ == "__main__":
-    main()
+    write_joke("/output/entry.txt")
